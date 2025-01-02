@@ -92,8 +92,17 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === b) {
+    return a < c && a + b >= c;
+  }
+  if (a === c) {
+    return a < b && a + c >= b;
+  }
+  if (c === b) {
+    return c < a && c + b >= a;
+  }
+  return false;
 }
 
 /**
@@ -110,8 +119,37 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let romNum = '';
+  let temp = num;
+  while (temp > 0) {
+    if (temp >= 10) {
+      const part = Math.floor(num / 10);
+      for (let i = 0; i < part; i += 1) {
+        romNum += 'X';
+      }
+      temp %= 10;
+    }
+    if (temp === 9) {
+      romNum += 'IX';
+      temp = 0;
+    }
+    if (temp >= 5) {
+      romNum += 'V';
+      temp -= 5;
+    }
+    if (temp === 4) {
+      romNum += 'IV';
+      temp = 0;
+    }
+    if (temp < 4) {
+      for (let i = 0; i < temp; i += 1) {
+        romNum += 'I';
+      }
+      temp = 0;
+    }
+  }
+  return romNum;
 }
 
 /**
@@ -129,8 +167,55 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let resStr = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    if (i > 0) {
+      resStr += ' ';
+    }
+    switch (numberStr[i]) {
+      case '-':
+        resStr += 'minus';
+        break;
+      case '0':
+        resStr += 'zero';
+        break;
+      case '1':
+        resStr += 'one';
+        break;
+      case '2':
+        resStr += 'two';
+        break;
+      case '3':
+        resStr += 'three';
+        break;
+      case '4':
+        resStr += 'four';
+        break;
+      case '5':
+        resStr += 'five';
+        break;
+      case '6':
+        resStr += 'six';
+        break;
+      case '7':
+        resStr += 'seven';
+        break;
+      case '8':
+        resStr += 'eight';
+        break;
+      case '9':
+        resStr += 'nine';
+        break;
+      case '.':
+      case ',':
+        resStr += 'point';
+        break;
+      default:
+        resStr += '';
+    }
+  }
+  return resStr;
 }
 
 /**
