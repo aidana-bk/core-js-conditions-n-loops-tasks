@@ -302,23 +302,20 @@ function isContainNumber(num, digit) {
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
 function getBalanceIndex(arr) {
-  if (arr.length <= 1 || !arr) {
-    return -1;
+  let total = 0;
+  let sum = 0;
+  let result = -1;
+  for (let i = 0; i < arr.length; i += 1) {
+    total += arr[i];
   }
   for (let i = 0; i < arr.length; i += 1) {
-    let leftSum = 0;
-    let rightSum = 0;
-    for (let left = 0; left < i; left += 1) {
-      leftSum += arr[left];
-    }
-    for (let right = i + 1; right < arr.length; right += 1) {
-      rightSum += arr[right];
-    }
-    if (leftSum === rightSum) {
-      return i;
+    sum += arr[i];
+    if (total - sum - arr[i + 1] === sum) {
+      result = i + 1;
+      break;
     }
   }
-  return -1;
+  return result;
 }
 
 /**
